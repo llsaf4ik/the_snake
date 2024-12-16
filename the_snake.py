@@ -101,7 +101,7 @@ class Snake(GameObject):
 
     def draw(self):
         """Метод для рисования змейки"""
-        for position in self.positions[:-1]:
+        for position in self.positions:
             rect = (pygame.Rect(position, (GRID_SIZE, GRID_SIZE)))
             pygame.draw.rect(screen, self.body_color, rect)
             pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
@@ -110,22 +110,17 @@ class Snake(GameObject):
         pygame.draw.rect(screen, self.body_color, head_rect)
         pygame.draw.rect(screen, BORDER_COLOR, head_rect, 1)
 
-        if self.last:
-            last_rect = pygame.Rect(self.last, (GRID_SIZE, GRID_SIZE))
-            pygame.draw.rect(screen, BOARD_BACKGROUND_COLOR, last_rect)
-
     def get_head_position(self):
         """Метод возвращает координаты головы змейки"""
         return self.positions[0]
 
     def reset(self):
         """Метод возращает змейку в начальное состояние"""
-        self.positions = [((SCREEN_WIDTH // 2), (SCREEN_HEIGHT // 2))] * 2
-        self.length = 2
+        self.positions = [((SCREEN_WIDTH // 2), (SCREEN_HEIGHT // 2))]
+        self.length = 1
         self.direction = RIGHT
         self.next_direction = None
         self.body_color = SNAKE_COLOR
-        self.last = None
         self.is_increased = False
 
     def is_collision(self):
